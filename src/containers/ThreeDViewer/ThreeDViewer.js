@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as Three from 'three';
-import HandSTL from '../../assets/Hand.stl';
+import LeftHandSTL from '../../assets/LeftHand.stl';
 import * as ThreeSTLLoader from 'three-stl-loader';
 
 class ThreeDViewer extends Component {
@@ -24,7 +24,7 @@ class ThreeDViewer extends Component {
             let STLLoader = new ThreeSTLLoader(Three);
             let stlload = new STLLoader();
             let material = new Three.MeshPhongMaterial( { color: 0xff5533, specular: 0x111111, shininess: 200 } );
-            stlload.load(HandSTL,  function ( geometry ) {
+            stlload.load(LeftHandSTL,  function (geometry ) {
                 let mesh = new Three.Mesh( geometry, material );
                 mesh.position.set( 0, - 0.25, 0.6 );
                 mesh.rotation.set( 0, - Math.PI, Math.PI/4 );
