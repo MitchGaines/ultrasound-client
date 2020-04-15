@@ -13,31 +13,21 @@ class ThreeDViewer extends Component {
             document.body.appendChild( container );
             scene = new Three.Scene();
             camera = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set( 3, 0.15, 10 );
+            camera.position.set( 120, 120, 120 );
             cameraTarget = new Three.Vector3( 0, - 0.25, 0 );
 
             scene = new Three.Scene();
             scene.background = new Three.Color( 0x72645b );
-            scene.fog = new Three.Fog( 0x72645b, 2, 15 );
+            scene.fog = new Three.Fog( 0x72645b, 2, 1000 );
 
             // Ground
-            let plane = new Three.Mesh(
-                new Three.PlaneBufferGeometry( 40, 40 ),
-                new Three.MeshPhongMaterial( { color: 0x999999, specular: 0x101010 } )
-            );
-            plane.rotation.x = - Math.PI / 2;
-            plane.position.y = - 0.5;
-            scene.add( plane );
-
-            plane.receiveShadow = true;
-
             let STLLoader = new ThreeSTLLoader(Three);
             let stlload = new STLLoader();
             let material = new Three.MeshPhongMaterial( { color: 0xff5533, specular: 0x111111, shininess: 200 } );
             stlload.load(HandSTL,  function ( geometry ) {
                 let mesh = new Three.Mesh( geometry, material );
                 mesh.position.set( 0, - 0.25, 0.6 );
-                mesh.rotation.set( 0, - Math.PI / 2, 0 );
+                mesh.rotation.set( 0, - Math.PI, Math.PI/4 );
                 mesh.scale.set( 0.5, 0.5, 0.5 );
                 mesh.castShadow = true;
                 mesh.receiveShadow = true;
@@ -94,9 +84,12 @@ class ThreeDViewer extends Component {
         };
 
         const render = () => {
-            let timer = Date.now() * 0.0005;
-            camera.position.x = Math.cos( timer ) * 3;
-            camera.position.z = Math.sin( timer ) * 3;
+            // let timer = Date.now() * 0.0005;
+            // camera.position.x = Math.cos( timer ) * 3;
+            // camera.position.z = Math.sin( timer ) * 3;
+            // console.log(camera.position);
+            camera.position.x = -2;
+            camera.position.z = 1;
             camera.lookAt( cameraTarget );
             renderer.render( scene, camera );
         };
