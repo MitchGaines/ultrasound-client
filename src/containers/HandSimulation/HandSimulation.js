@@ -17,7 +17,7 @@ import RHRing3STL from '../../assets/FlexyRH/RH_4-3.stl';
 import RHPinky3STL from '../../assets/FlexyRH/RH_5-3.stl';
 import * as ThreeSTLLoader from 'three-stl-loader';
 
-class ThreeDViewer extends Component {
+class HandSimulation extends Component {
 
     componentDidMount() {
         let container, camera, cameraTarget, scene, renderer;
@@ -301,4 +301,4 @@ class ThreeDViewer extends Component {
     }
 }
 
-export default ThreeDViewer;
+export default HandSimulation;
