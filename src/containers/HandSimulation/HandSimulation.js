@@ -127,13 +127,14 @@ class HandSimulation extends Component {
             camera.position.x = Math.sin( timer ) * 100;
             camera.position.z = Math.cos( timer ) * 100;
             camera.position.y = 120;
-            if(palm && index_1 && index_2 && index_3
+
+            if(index_1 && index_2 && index_3
                 && middle_1 && middle_2 && middle_3
                 && ring_1 && ring_2 && ring_3
                 && pinky_1 && pinky_2 && pinky_3) {
                 for(let i = 1; i <= 90; i++){
                     // iterate degrees 1-90
-
+                    index_3.animateComponent([Math.sin(timer)*100], []);
                 }
             }
             camera.lookAt( cameraTarget );
