@@ -16,11 +16,17 @@ import RHMiddle3STL from '../../assets/FlexyRH/RH_3-3.stl';
 import RHRing3STL from '../../assets/FlexyRH/RH_4-3.stl';
 import RHPinky3STL from '../../assets/FlexyRH/RH_5-3.stl';
 import * as ThreeSTLLoader from 'three-stl-loader';
+import Finger from './Finger/Finger';
 
 class HandSimulation extends Component {
 
     componentDidMount() {
         let container, camera, cameraTarget, scene, renderer;
+        let palm, thumb_1, thumb_2,
+            index_1, index_2, index_3,
+            middle_1, middle_2, middle_3,
+            ring_1, ring_2, ring_3,
+            pinky_1, pinky_2, pinky_3;
 
         const init = () => {
             container = document.createElement( 'div' );
@@ -37,197 +43,31 @@ class HandSimulation extends Component {
             let STLLoader = new ThreeSTLLoader(Three);
             let stl_load = new STLLoader();
             let material = new Three.MeshPhongMaterial( { color: 0xff5533, specular: 0x111111, shininess: 200 } );
+
             stl_load.load(RHPalmSTL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                mesh.position.set( 0, 0, 0 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI/2);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
+                palm = new Three.Mesh( geometry, material );
+                palm.position.set( 0, 0, 0 );
+                palm.rotation.set( -Math.PI/2, 0, Math.PI/2);
+                palm.scale.set( 0.5, 0.5, 0.5 );
+                palm.castShadow = true;
+                palm.receiveShadow = true;
+                scene.add( palm );
             });
 
-            // Thumb 1
-            stl_load.load(RHThumb1STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( 24, 28, 9.5 );
-                mesh.rotation.set(-Math.PI/4,Math.PI/3-0.15,Math.PI/2);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Thumb 2
-            stl_load.load(RHThumb2STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( 38, 35, 16.5 );
-                mesh.rotation.set(-Math.PI/4,Math.PI/3-0.15,Math.PI/2);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Index 1
-            stl_load.load(RHIndex1STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( 8, 53, -6 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Index 2
-            stl_load.load(RHIndex2STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( 8, 73, -6 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Index 3
-            stl_load.load(RHIndex3STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( 8, 85.5, -6 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Middle 1
-            stl_load.load(RHMiddle1STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -2.5, 52, -7 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Middle 2
-            stl_load.load(RHMiddle2STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -2.5, 74, -7 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Middle 3
-            stl_load.load(RHMiddle3STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -2.5, 88, -7 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Ring 1
-            stl_load.load(RHRing1STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -13, 50, -7 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Ring 2
-            stl_load.load(RHRing2STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -13, 70.5, -7 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Ring 3
-            stl_load.load(RHRing3STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -13, 83.5, -7 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Pinky 1
-            stl_load.load(RHPinky1STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -23, 43, -6 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Pinky 2
-            stl_load.load(RHPinky2STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -23, 60, -6 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
-
-            // Pinky 3
-            stl_load.load(RHPinky3STL,  function (geometry ) {
-                let mesh = new Three.Mesh( geometry, material );
-                let mesh_axes = new Three.AxesHelper(70);
-                mesh.add(mesh_axes);
-                mesh.position.set( -23, 70, -6 );
-                mesh.rotation.set( -Math.PI/2, 0, Math.PI);
-                mesh.scale.set( 0.5, 0.5, 0.5 );
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add( mesh );
-            });
+            thumb_1 = new Finger(scene, RHThumb1STL, [24, 28, 9.5], [-Math.PI/4, Math.PI/3-0.15, Math.PI/2]);
+            thumb_2 = new Finger(scene, RHThumb2STL, [38, 35, 16.5], [-Math.PI/4, Math.PI/3-0.15, Math.PI/2]);
+            index_1 = new Finger(scene, RHIndex1STL, [8, 53, -6], [-Math.PI/2, 0, Math.PI]);
+            index_2 = new Finger(scene, RHIndex2STL, [8, 73, -6], [-Math.PI/2, 0, Math.PI]);
+            index_3 = new Finger(scene, RHIndex3STL, [8, 85.5, -6], [-Math.PI/2, 0, Math.PI]);
+            middle_1 = new Finger(scene, RHMiddle1STL, [-2.5, 52, -7], [-Math.PI/2, 0, Math.PI]);
+            middle_2 = new Finger(scene, RHMiddle2STL, [-2.5, 74, -7], [-Math.PI/2, 0, Math.PI]);
+            middle_3 = new Finger(scene, RHMiddle3STL, [-2.5, 88, -7], [-Math.PI/2, 0, Math.PI]);
+            ring_1 = new Finger(scene, RHRing1STL, [-13, 50, -7 ], [-Math.PI/2, 0, Math.PI]);
+            ring_2 = new Finger(scene, RHRing2STL, [-13, 70.5, -7 ], [-Math.PI/2, 0, Math.PI]);
+            ring_3 = new Finger(scene, RHRing3STL, [-13, 83.5, -7 ], [-Math.PI/2, 0, Math.PI]);
+            pinky_1 = new Finger(scene, RHPinky1STL, [-23, 43, -6 ], [-Math.PI/2, 0, Math.PI]);
+            pinky_2 = new Finger(scene, RHPinky2STL, [-23, 60, -6 ], [-Math.PI/2, 0, Math.PI]);
+            pinky_3 = new Finger(scene, RHPinky3STL, [-23, 70, -6 ], [-Math.PI/2, 0, Math.PI]);
 
             // Axes
             let scene_axes = new Three.AxesHelper( 500);
@@ -287,9 +127,19 @@ class HandSimulation extends Component {
             camera.position.x = Math.sin( timer ) * 100;
             camera.position.z = Math.cos( timer ) * 100;
             camera.position.y = 120;
+            if(palm && index_1 && index_2 && index_3
+                && middle_1 && middle_2 && middle_3
+                && ring_1 && ring_2 && ring_3
+                && pinky_1 && pinky_2 && pinky_3) {
+                for(let i = 1; i <= 90; i++){
+                    // iterate degrees 1-90
+
+                }
+            }
             camera.lookAt( cameraTarget );
             renderer.render( scene, camera );
         };
+
         init();
         animate();
     }
