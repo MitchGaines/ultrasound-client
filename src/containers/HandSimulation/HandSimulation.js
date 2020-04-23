@@ -17,6 +17,7 @@ import RHRing3STL from '../../assets/FlexyRH/RH_4-3.stl';
 import RHPinky3STL from '../../assets/FlexyRH/RH_5-3.stl';
 import * as ThreeSTLLoader from 'three-stl-loader';
 import Finger from './Finger/Finger';
+import FingerKinematicEngine from "./FingerKinematicEngine/FingerKinematicEngine";
 
 class HandSimulation extends Component {
 
@@ -27,6 +28,12 @@ class HandSimulation extends Component {
             middle_1, middle_2, middle_3,
             ring_1, ring_2, ring_3,
             pinky_1, pinky_2, pinky_3;
+
+        // let thumb_finger = new FingerKinematicEngine([mcp, mcp, 10], [thumb_1, thumb_2]);
+        let index_finger = new FingerKinematicEngine([53, 19, 11], -8, -6);
+        // let middle_finger = new FingerKinematicEngine([mcp, mcp, 10], [middle_1, middle_2, middle_3]);
+        // let ring_finger = new FingerKinematicEngine([mcp, mcp, 10], [ring_1, ring_2, ring_3]);
+        // let pinky_finger = new FingerKinematicEngine([mcp, mcp, 10], [pinky_1, pinky_2, pinky_3]);
 
         const init = () => {
             container = document.createElement( 'div' );
@@ -126,17 +133,27 @@ class HandSimulation extends Component {
             let timer = Date.now() * 0.0005;
             camera.position.x = Math.sin( timer ) * 100;
             camera.position.z = Math.cos( timer ) * 100;
+            console.log(Math.abs(Math.sin(timer) * Math.PI/2));
             camera.position.y = 120;
 
+            // make sure all the components are loaded before doing anything with them
             if(index_1 && index_2 && index_3
                 && middle_1 && middle_2 && middle_3
                 && ring_1 && ring_2 && ring_3
                 && pinky_1 && pinky_2 && pinky_3) {
                 for(let i = 1; i <= 90; i++){
                     // iterate degrees 1-90
-                    index_3.animateComponent([Math.sin(timer)*100], []);
+                    // index_3.setPose([Math.abs(Math.sin(timer)*50)-6], []);
+                    index_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2), Math.abs(Math.sin(timer) * Math.PI/2), 0]);
+
+                    let index_fwkin = index_finger.getFwkin();
+
+                    index_1.setPose(index_fwkin[0], [Math.atan2(index_fwkin[1][2]-53,index_fwkin[0][3]-6),0,0]);
+                    index_2.setPose(index_fwkin[2], []);
+                    index_3.setPose(index_fwkin[3], []);
                 }
             }
+
             camera.lookAt( cameraTarget );
             renderer.render( scene, camera );
         };
