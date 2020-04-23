@@ -11,8 +11,6 @@ class Finger {
         let material = new Three.MeshPhongMaterial( { color: 0xff5533, specular: 0x111111, shininess: 200 } );
         const stlOnLoadFunc = ((geometry) => {
             this.finger_obj = new Three.Mesh( geometry, material );
-            // let mesh_axes = new Three.AxesHelper(70);
-            // this.finger_obj.add(mesh_axes);
             this.finger_obj.position.set( position[0], position[1], position[2] );
             this.finger_obj.rotation.set( rotation[0], rotation[1], rotation[2]);
             this.finger_obj.scale.set( 0.5, 0.5, 0.5 );

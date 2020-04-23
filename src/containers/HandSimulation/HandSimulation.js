@@ -31,9 +31,9 @@ class HandSimulation extends Component {
 
         // let thumb_finger = new FingerKinematicEngine();
         let index_finger = new FingerKinematicEngine([53, 19, 11, 20], 8, -6);
-        //let middle_finger = new FingerKinematicEngine([52, 22, 14, 15], -2.5, -7);
-        //let ring_finger = new FingerKinematicEngine([50, 20.5, 13.5, 14], -13, -7);
-        //let pinky_finger = new FingerKinematicEngine([43, 23, 10, 9], -23, -6);
+        let middle_finger = new FingerKinematicEngine([52, 20, 12, 15], -2.5, -7);
+        let ring_finger = new FingerKinematicEngine([50, 19, 12, 14], -13, -7);
+        let pinky_finger = new FingerKinematicEngine([43, 16, 8, 7], -23, -6);
 
         const init = () => {
             container = document.createElement( 'div' );
@@ -140,6 +140,7 @@ class HandSimulation extends Component {
                 && middle_1 && middle_2 && middle_3
                 && ring_1 && ring_2 && ring_3
                 && pinky_1 && pinky_2 && pinky_3) {
+
                 index_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
                     Math.abs(Math.sin(timer) * Math.PI/2),
                     Math.abs(Math.sin(timer) * Math.PI/4)]);
@@ -148,6 +149,33 @@ class HandSimulation extends Component {
                 index_1.setPose(index_fwkin[0], index_fwkin[1]);
                 index_2.setPose(index_fwkin[2], index_fwkin[3]);
                 index_3.setPose(index_fwkin[4], index_fwkin[5]);
+                
+                middle_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
+                    Math.abs(Math.sin(timer) * Math.PI/2),
+                    Math.abs(Math.sin(timer) * Math.PI/4)]);
+
+                let middle_fwkin = middle_finger.getFwkin();
+                middle_1.setPose(middle_fwkin[0], middle_fwkin[1]);
+                middle_2.setPose(middle_fwkin[2], middle_fwkin[3]);
+                middle_3.setPose(middle_fwkin[4], middle_fwkin[5]);
+
+                ring_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
+                    Math.abs(Math.sin(timer) * Math.PI/2),
+                    Math.abs(Math.sin(timer) * Math.PI/4)]);
+
+                let ring_fwkin = ring_finger.getFwkin();
+                ring_1.setPose(ring_fwkin[0], ring_fwkin[1]);
+                ring_2.setPose(ring_fwkin[2], ring_fwkin[3]);
+                ring_3.setPose(ring_fwkin[4], ring_fwkin[5]);
+
+                pinky_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
+                    Math.abs(Math.sin(timer) * Math.PI/2),
+                    Math.abs(Math.sin(timer) * Math.PI/4)]);
+
+                let pinky_fwkin = pinky_finger.getFwkin();
+                pinky_1.setPose(pinky_fwkin[0], pinky_fwkin[1]);
+                pinky_2.setPose(pinky_fwkin[2], pinky_fwkin[3]);
+                pinky_3.setPose(pinky_fwkin[4], pinky_fwkin[5]);
             }
 
             camera.lookAt( cameraTarget );
