@@ -1,0 +1,12 @@
+
+.Header {
+    width: 100%;
+    background-color: #282c34;
+    display: flex;
+}
+
+.Header h1 {
+    color: antiquewhite;
+    padding: 40px;
+    margin: 0 auto;
+}

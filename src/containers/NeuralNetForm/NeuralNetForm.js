@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Aux from '../../hoc/Aux';
+import classes from './NeuralNetForm.module.css';
 
 function NeuralNetForm() {
     return(
-        <Aux>
+        <div className={classes.NeuralNetForm}>
             <p>Neural Net Form</p>
-        </Aux>
+        </div>
     );
 }
 

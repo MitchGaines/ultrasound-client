@@ -8,9 +8,9 @@ function App() {
     return (
         <div>
             <Layout>
-                <ImageUpload/>
+                <ImageUpload />
                 <HandSimulation />
-                <NeuralNetForm/>
+                <NeuralNetForm />
             </Layout>
         </div>
     );

@@ -1,0 +1,11 @@
+
+.Uploader {
+    background-color: #343028;
+    display: inline-flex;
+    width: 50%;
+    align-content: center;
+}
+
+.Uploader p {
+    color: antiquewhite;
+}

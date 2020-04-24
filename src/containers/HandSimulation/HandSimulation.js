@@ -22,6 +22,8 @@ import FingerKinematicEngine from "./FingerKinematicEngine/FingerKinematicEngine
 class HandSimulation extends Component {
 
     componentDidMount() {
+        let canvas_width = window.innerWidth - 15;
+        let canvas_height = window.innerHeight;
         let container, camera, cameraTarget, scene, renderer;
         let palm, thumb_1, thumb_2,
             index_1, index_2, index_3,
@@ -39,9 +41,9 @@ class HandSimulation extends Component {
             container = document.createElement( 'div' );
             document.body.appendChild( container );
             scene = new Three.Scene();
-            camera = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera = new Three.PerspectiveCamera(75, canvas_width/canvas_height, 0.1, 1000);
             camera.position.set( 120, 120, 120 );
-            cameraTarget = new Three.Vector3( 0, 70, 0);
+            cameraTarget = new Three.Vector3( 0, 60, 0);
 
             scene = new Three.Scene();
             scene.background = new Three.Color( 0x72645b );
@@ -88,14 +90,14 @@ class HandSimulation extends Component {
             // renderer
             renderer = new Three.WebGLRenderer( { antialias: true } );
             renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize( canvas_width, canvas_height);
             renderer.outputEncoding = Three.sRGBEncoding;
 
             renderer.shadowMap.enabled = true;
 
             container.appendChild(renderer.domElement);
 
-            window.addEventListener( 'resize', onWindowResize, false );
+            // window.addEventListener( 'resize', onWindowResize, false );
         };
 
         const addShadowedLight = (x, y, z, color, intensity) => {
@@ -117,12 +119,14 @@ class HandSimulation extends Component {
             directionalLight.shadow.bias = - 0.002;
         };
 
+        /*
         const onWindowResize = () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.aspect = (window.innerWidth-scrollbar_offset) / window.innerHeight;
             camera.updateProjectionMatrix();
 
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize( window.innerWidth-scrollbar_offset, window.innerHeight );
         };
+         */
 
         const animate = () => {
             requestAnimationFrame( animate );
