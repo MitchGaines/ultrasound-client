@@ -1,11 +1,17 @@
 
 .Uploader {
     background-color: #343028;
-    display: inline-flex;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
     width: 50%;
-    align-content: center;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 .Uploader p {
     color: antiquewhite;
+    font-weight: 100;
+    font-size: 1.3em;
 }
+

@@ -97,7 +97,7 @@ class HandSimulation extends Component {
 
             container.appendChild(renderer.domElement);
 
-            // window.addEventListener( 'resize', onWindowResize, false );
+            window.addEventListener( 'resize', onWindowResize, false );
         };
 
         const addShadowedLight = (x, y, z, color, intensity) => {
@@ -119,14 +119,15 @@ class HandSimulation extends Component {
             directionalLight.shadow.bias = - 0.002;
         };
 
-        /*
         const onWindowResize = () => {
-            camera.aspect = (window.innerWidth-scrollbar_offset) / window.innerHeight;
+            canvas_width = window.innerWidth - 15;
+            canvas_height = window.innerHeight;
+
+            camera.aspect = canvas_width/canvas_height;
             camera.updateProjectionMatrix();
 
-            renderer.setSize( window.innerWidth-scrollbar_offset, window.innerHeight );
+            renderer.setSize( canvas_width, canvas_height );
         };
-         */
 
         const animate = () => {
             requestAnimationFrame( animate );

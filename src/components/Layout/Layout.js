@@ -5,7 +5,7 @@ import classes from './Layout.module.css';
 
 const layout = (props) => (
   <Aux>
-      <Header title="Ultrasound Modelling" />
+      <Header title="ULTRASOUND SIMULATOR" />
       <main className={classes.Content}>
           {props.children}
       </main>

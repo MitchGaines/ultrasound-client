@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Button from '../../components/Button/Button';
 import classes from './ImageUpload.module.css';
 
