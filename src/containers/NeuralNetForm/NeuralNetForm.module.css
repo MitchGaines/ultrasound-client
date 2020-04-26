@@ -1,0 +1,28 @@
+
+.NeuralNetForm {
+    background-color: #342a28;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 50%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.NeuralNetForm label {
+    color: antiquewhite;
+    position: relative;
+    font-weight: 100;
+    font-size: 1em;
+}
+
+.Radios {
+    display: inline-flex;
+    flex-flow: row;
+    margin: 1em;
+}
+
+.Radios div {
+    margin: 0.5em;
+}
+

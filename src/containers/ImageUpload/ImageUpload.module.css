@@ -1,0 +1,12 @@
+
+.Uploader {
+    background-color: #343028;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 50%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+

@@ -1,12 +1,13 @@
 import React from 'react';
-
-import Aux from '../../hoc/Aux';
+import Button from '../../components/Button/Button';
+import classes from './ImageUpload.module.css';
 
 function ImageUpload() {
     return(
-        <Aux>
-            <p>image uploading</p>
-        </Aux>
+        <div className={classes.Uploader}>
+            <h4>Verasonics .mat file upload</h4>
+            <Button name="Upload" />
+        </div>
     );
 }
 

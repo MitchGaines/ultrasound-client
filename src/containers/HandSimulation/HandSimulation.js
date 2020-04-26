@@ -22,6 +22,8 @@ import FingerKinematicEngine from "./FingerKinematicEngine/FingerKinematicEngine
 class HandSimulation extends Component {
 
     componentDidMount() {
+        let canvas_width = window.innerWidth - 15;
+        let canvas_height = window.innerHeight;
         let container, camera, cameraTarget, scene, renderer;
         let palm, thumb_1, thumb_2,
             index_1, index_2, index_3,
@@ -39,9 +41,9 @@ class HandSimulation extends Component {
             container = document.createElement( 'div' );
             document.body.appendChild( container );
             scene = new Three.Scene();
-            camera = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera = new Three.PerspectiveCamera(75, canvas_width/canvas_height, 0.1, 1000);
             camera.position.set( 120, 120, 120 );
-            cameraTarget = new Three.Vector3( 0, 70, 0);
+            cameraTarget = new Three.Vector3( 0, 60, 0);
 
             scene = new Three.Scene();
             scene.background = new Three.Color( 0x72645b );
@@ -88,7 +90,7 @@ class HandSimulation extends Component {
             // renderer
             renderer = new Three.WebGLRenderer( { antialias: true } );
             renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize( canvas_width, canvas_height);
             renderer.outputEncoding = Three.sRGBEncoding;
 
             renderer.shadowMap.enabled = true;
@@ -118,10 +120,13 @@ class HandSimulation extends Component {
         };
 
         const onWindowResize = () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            canvas_width = window.innerWidth - 15;
+            canvas_height = window.innerHeight;
+
+            camera.aspect = canvas_width/canvas_height;
             camera.updateProjectionMatrix();
 
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize( canvas_width, canvas_height );
         };
 
         const animate = () => {
