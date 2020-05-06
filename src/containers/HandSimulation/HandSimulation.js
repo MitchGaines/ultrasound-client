@@ -136,9 +136,9 @@ class HandSimulation extends Component {
 
         const render = () => {
             let timer = Date.now() * 0.0005;
-            camera.position.x = Math.sin( timer ) * 100;
-            camera.position.z = Math.cos( timer ) * 100;
-            camera.position.y = 120;
+            // camera.position.x = Math.sin( timer ) * 100;
+            // camera.position.z = Math.cos( timer ) * 100;
+            //camera.position.y = 120;
 
             // make sure all the components are loaded before doing anything with them
             if(index_1 && index_2 && index_3
@@ -146,41 +146,44 @@ class HandSimulation extends Component {
                 && ring_1 && ring_2 && ring_3
                 && pinky_1 && pinky_2 && pinky_3) {
 
-                index_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/4)]);
+                let url = "http://localhost:5000/api/getAngle";
+                // poll api
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        // now that we have a response, do the fwkin
+                        let angles = data.angles;
 
-                let index_fwkin = index_finger.getFwkin();
-                index_1.setPose(index_fwkin[0], index_fwkin[1]);
-                index_2.setPose(index_fwkin[2], index_fwkin[3]);
-                index_3.setPose(index_fwkin[4], index_fwkin[5]);
-                
-                middle_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/4)]);
+                        index_finger.doFwKin([angles[0], angles[0], 0.2]);
 
-                let middle_fwkin = middle_finger.getFwkin();
-                middle_1.setPose(middle_fwkin[0], middle_fwkin[1]);
-                middle_2.setPose(middle_fwkin[2], middle_fwkin[3]);
-                middle_3.setPose(middle_fwkin[4], middle_fwkin[5]);
+                        let index_fwkin = index_finger.getFwkin();
+                        index_1.setPose(index_fwkin[0], index_fwkin[1]);
+                        index_2.setPose(index_fwkin[2], index_fwkin[3]);
+                        index_3.setPose(index_fwkin[4], index_fwkin[5]);
 
-                ring_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/4)]);
+                        middle_finger.doFwKin([angles[1], angles[1], 0.2]);
 
-                let ring_fwkin = ring_finger.getFwkin();
-                ring_1.setPose(ring_fwkin[0], ring_fwkin[1]);
-                ring_2.setPose(ring_fwkin[2], ring_fwkin[3]);
-                ring_3.setPose(ring_fwkin[4], ring_fwkin[5]);
+                        let middle_fwkin = middle_finger.getFwkin();
+                        middle_1.setPose(middle_fwkin[0], middle_fwkin[1]);
+                        middle_2.setPose(middle_fwkin[2], middle_fwkin[3]);
+                        middle_3.setPose(middle_fwkin[4], middle_fwkin[5]);
 
-                pinky_finger.doFwKin([Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/2),
-                    Math.abs(Math.sin(timer) * Math.PI/4)]);
+                        ring_finger.doFwKin([angles[2], angles[2], 0.2]);
 
-                let pinky_fwkin = pinky_finger.getFwkin();
-                pinky_1.setPose(pinky_fwkin[0], pinky_fwkin[1]);
-                pinky_2.setPose(pinky_fwkin[2], pinky_fwkin[3]);
-                pinky_3.setPose(pinky_fwkin[4], pinky_fwkin[5]);
+                        let ring_fwkin = ring_finger.getFwkin();
+                        ring_1.setPose(ring_fwkin[0], ring_fwkin[1]);
+                        ring_2.setPose(ring_fwkin[2], ring_fwkin[3]);
+                        ring_3.setPose(ring_fwkin[4], ring_fwkin[5]);
+
+                        pinky_finger.doFwKin([angles[3], angles[3], 0.2]);
+
+                        let pinky_fwkin = pinky_finger.getFwkin();
+                        pinky_1.setPose(pinky_fwkin[0], pinky_fwkin[1]);
+                        pinky_2.setPose(pinky_fwkin[2], pinky_fwkin[3]);
+                        pinky_3.setPose(pinky_fwkin[4], pinky_fwkin[5]);
+
+                    });
+
             }
 
             camera.lookAt( cameraTarget );
